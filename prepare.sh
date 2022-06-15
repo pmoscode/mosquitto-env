@@ -21,5 +21,5 @@ echo " "
 for value in ${MOSQUITTO_RELEASES_ARRAY}
 do
     echo Tagging version: ${value}
-    git tag -a ${value} -m "New Version $value"; git push https://${USER}:${PASSWORD}@gitlab.com/pmoscodegrp/mosquitto-env.git HEAD:master --tags
+    git tag -a ${value} -m "New Version $value"; git push https://oauth2:${REPO_ACCESS_TOKEN}@gitlab.com/pmoscode/axelor-docker.git HEAD:master --tags
 done

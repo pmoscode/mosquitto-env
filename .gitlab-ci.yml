@@ -18,7 +18,6 @@ check version update:
     - git config --global user.name "$GITLAB_USER_LOGIN"
     - git config --global user.email "$GITLAB_USER_EMAIL"
   script:
-    - echo "$USER -- $PASSWORD"
     - ./prepare.sh
   only:
     - schedules
