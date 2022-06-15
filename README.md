@@ -1,5 +1,7 @@
 # mosquitto
 
+Disclaimer: This is a fork of: https://github.com/efrecon/docker-mosquitto
+
 These Docker [images] behave almost exactly as the official Eclipse [mosquitto]
 server [images][official], while providing easy configuration of most parameters
 through environment variables. They are also ready for TLS connections using

@@ -1,0 +1,34 @@
+image: docker:18
+
+services:
+  - docker:dind
+
+stages:
+  - tag
+  - publish
+
+variables:
+  DOCKER_VERSION: pmoscode/mosquitto-env:$CI_COMMIT_TAG
+  APP_VERSION: $CI_COMMIT_TAG
+
+check version update:
+  stage: tag
+  before_script:
+    - apk add jq curl git bash
+    - git config --global user.name "$GITLAB_USER_LOGIN"
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+  script:
+    - ./prepare.sh
+  only:
+    - schedules
+
+push docker:
+  stage: publish
+  script:
+    - echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USER}" --password-stdin
+    - docker build -t $DOCKER_VERSION --build-arg MOSQUITTO_VERSION=$APP_VERSION .
+    - docker push $DOCKER_VERSION
+  only:
+    - tags
+  except:
+    - schedules
