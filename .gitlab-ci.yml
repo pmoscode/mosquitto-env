@@ -14,8 +14,8 @@ variables:
 check version update:
   stage: tag
   before_script:
-    - apk add jq curl git bash
-    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - apk add jq curl git bash openssh-client
+    # - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
     - eval `ssh-agent -s`
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
     - mkdir -p ~/.ssh
