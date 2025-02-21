@@ -1,4 +1,4 @@
-image: docker:27
+image: docker:28
 
 services:
   - docker:dind
